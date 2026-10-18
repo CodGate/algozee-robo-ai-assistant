@@ -1,4 +1,4 @@
-import {env} from 'cloudflare:workers';
+import {env} from '../../../lib/runtime-env';
 import {database,getCustomer,subscription} from '../../../lib/customer-auth';
 import {sameOrigin} from '../../../lib/admin';
 function settings(id:string){try{return JSON.parse((env as any).ROBO_COMMUNICATIONS_JSON||'{}')[id]||{}}catch{return {}}}

@@ -1,0 +1,9 @@
+[build]
+  command = "pnpm exec next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Netlify automatically uses its Next.js runtime. Do not install the
+# legacy @netlify/plugin-nextjs explicitly.
