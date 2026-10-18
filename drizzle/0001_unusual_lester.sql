@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `automation` text DEFAULT 'not_configured' NOT NULL;

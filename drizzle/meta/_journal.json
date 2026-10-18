@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791365387777,
+      "tag": "0000_ancient_hannibal_king",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791377979813,
+      "tag": "0001_unusual_lester",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791378147919,
+      "tag": "0002_handy_sunset_bain",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1791676800000,
+      "tag": "0003_zevo_customer_workspace",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1791712800000,
+      "tag": "0004_robo_manual_subscriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1791730800000,
+      "tag": "0005_robo_contacts",
+      "breakpoints": true
+    }
+  ]
+}

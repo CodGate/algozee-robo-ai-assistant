@@ -1,0 +1,81 @@
+{
+  "name": "AlgoZee \u2014 Confirmed enquiry bridge",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "algozee-enquiry",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "algozee-webhook",
+      "name": "Confirmed enquiry",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "algozee-enquiry"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $json.body;\nif (!payload || payload.event !== 'enquiry.confirmed' || !payload.eventId || !payload.order?.contact) throw new Error('Invalid AlgoZee event');\nreturn [{json:{accepted:true,eventId:payload.eventId,order:payload.order,receivedAt:new Date().toISOString()}}];"
+      },
+      "id": "validate",
+      "name": "Validate enquiry",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { accepted: true, eventId: $json.eventId } }}",
+        "options": {}
+      },
+      "id": "ack",
+      "name": "Acknowledge receipt",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        750,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Confirmed enquiry": {
+      "main": [
+        [
+          {
+            "node": "Validate enquiry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate enquiry": {
+      "main": [
+        [
+          {
+            "node": "Acknowledge receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

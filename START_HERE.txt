@@ -1,0 +1,11 @@
+AlgoZee Hybrid Agent — web application source, not an APK.
+
+Open HYBRID_SETUP.md for activation instructions.
+Customer demo: https://orderly-voice-demo.raju2193redm.chatgpt.site
+Private admin: https://orderly-voice-demo.raju2193redm.chatgpt.site/admin
+
+Includes customer chat, owner-authorized admin, encrypted connection settings, Gemini adapter, saved enquiries, and n8n workflow JSON. Live Gemini and n8n credentials are NOT included.
+
+Import workflows/AlgoZee_Enquiry_Workflow.json into your n8n account and attach Header Auth credentials before activation. This workflow acknowledges enquiries; email and CRM side effects require further configuration.
+
+Production remains private. Browser visual/voice QA and real provider end-to-end tests remain pending. Build, type, authorization, consent, encryption, mocked AI and migration checks passed.

@@ -1,0 +1,5 @@
+import {readConnections} from './config';
+import {getDb} from '../db';
+import {orders} from '../db/schema';
+import {eq} from 'drizzle-orm';
+export async function dispatchOrder(order:any){const e=await readConnections();if(!e.N8N_WEBHOOK_URL||!e.N8N_WEBHOOK_SECRET){await getDb().update(orders).set({automation:'not_configured'}).where(eq(orders.id,order.id));return 'not_configured';}try{const url=new URL(e.N8N_WEBHOOK_URL);if(url.protocol!=='https:')throw Error('HTTPS required');const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','X-AlgoZee-Secret':e.N8N_WEBHOOK_SECRET},body:JSON.stringify({event:'enquiry.confirmed',eventId:order.id,brand:'AlgoZee',order}),signal:AbortSignal.timeout(12000),redirect:'error'});const d:any=await r.json();if(!r.ok||d.accepted!==true||d.eventId!==order.id)throw Error('Workflow did not acknowledge event');await getDb().update(orders).set({automation:'acknowledged'}).where(eq(orders.id,order.id));return 'acknowledged';}catch{await getDb().update(orders).set({automation:'failed'}).where(eq(orders.id,order.id));return 'failed';}}
